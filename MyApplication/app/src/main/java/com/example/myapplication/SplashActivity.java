@@ -25,8 +25,8 @@ public class SplashActivity extends AppCompatActivity {
         // 2.获取或设置控件的值
         String version = tvVersion.getText().toString();
         try {
-            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(),0);
-            tvVersion.setText("版本号："+ info.versionName);
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+            tvVersion.setText("版本号：" + info.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -36,10 +36,12 @@ public class SplashActivity extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                //不带数据的 界面跳转
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
+                SplashActivity.this.finish();
             }
         };
-        timer.schedule(task,5000);
+        timer.schedule(task, 1000);
     }
 }
