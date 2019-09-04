@@ -10,11 +10,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.utils.MD5Utils;
 
 public class LoginActivity extends AppCompatActivity {
+    private Toolbar toolbar;
     private EditText etUsername, etPassword;
     private Button buttonRegister, buttonLogin, buttonForget;
     private TextView tUsername;
@@ -24,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        initToolBar();
         initView();
         getUserName();
 
@@ -65,8 +69,26 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void initToolBar() {
+        toolbar = findViewById(R.id.title_toolbar);
+        toolbar.setTitle("登录");
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);//设置返回键
+//            actionBar.setHomeButtonEnabled(true);//设置是否是首页
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginActivity.this.finish();
+            }
+        });
+    }
+
+
     private void initView() {
-//        View view = View.inflate(this, (R.layout.activity_login), null);
         etUsername = findViewById(R.id.username);
         etPassword = findViewById(R.id.password);
         buttonRegister = findViewById(R.id.button_register);

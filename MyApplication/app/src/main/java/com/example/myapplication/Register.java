@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.example.myapplication.utils.MD5Utils;
 
 public class Register extends AppCompatActivity {
+    private Toolbar toolbar;
     private EditText etUsername, etPaaword, etPwdAgain;
     private Button btnRegister;
 
@@ -23,6 +26,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //1. 获取界面上的控件
+        initToolBar();
         initView();
         //2. button的点击事件的监听
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +54,24 @@ public class Register extends AppCompatActivity {
                     //启动
                     startActivity(intent);
                 }
+            }
+        });
+    }
+
+    private void initToolBar() {
+        toolbar = findViewById(R.id.title_toolbar);
+        toolbar.setTitle("注册");
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);//设置返回键
+//            actionBar.setHomeButtonEnabled(true);//设置是否是首页
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Register.this.finish();
             }
         });
     }
